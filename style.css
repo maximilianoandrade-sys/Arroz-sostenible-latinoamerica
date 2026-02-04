@@ -19,7 +19,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     /* Fixed Background Image */
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('assets/img/bg-rice.png');
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('https://images.unsplash.com/photo-1595839095697-740702df723e?q=80&w=1600');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
