@@ -199,7 +199,18 @@
         <div class="container">
             <h2 class="title">Cobertura Regional</h2>
             <p class="subtitle">Países donde estamos implementando soluciones sostenibles</p>
-            <div id="coverage-map" style="height: 500px; width: 100%; border-radius: 8px; z-index: 1;"></div>
+            <div class="map-layout">
+                <div class="map-sidebar">
+                    <div class="map-sidebar-header">
+                        <h3><i class="fas fa-map-marker-alt"></i> Regiones</h3>
+                        <p>Selecciona un país para ver detalles</p>
+                    </div>
+                    <div id="location-list" class="location-list">
+                        <!-- Locations injected via JS -->
+                    </div>
+                </div>
+                <div id="coverage-map" class="map-container" style="z-index: 1;"></div>
+            </div>
         </div>
     </section>
 
@@ -320,6 +331,9 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+    <!-- Supabase JS -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="supabase-client.js"></script>
     <script src="script.js"></script>
 </body>
 

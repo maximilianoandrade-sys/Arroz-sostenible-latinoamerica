@@ -59,24 +59,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- 3. Leaflet Map (Index) - Enhanced Version ---
     const mapElement = document.getElementById('coverage-map');
-    if (mapElement && typeof L !== 'undefined') {
-        const map = L.map('coverage-map').setView([-20.0, -60.0], 3);
+    const locationList = document.getElementById('location-list');
 
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '&copy; OpenStreetMap contributors'
+    if (mapElement && typeof L !== 'undefined') {
+        // Init Map with Premium Tiles (CartoDB Voyager)
+        const map = L.map('coverage-map', {
+            scrollWheelZoom: false // Better UX for scrolling page
+        }).setView([-20.0, -60.0], 3);
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png', {
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+            subdomains: 'abcd',
+            maxZoom: 19
         }).addTo(map);
+
+        // Move zoom control
+        map.zoomControl.setPosition('topright');
 
         // Custom icon
         const customIcon = L.divIcon({
             className: 'custom-marker',
-            html: '<div style="background-color: #004d40; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #0089d0; display: flex; align-items: center; justify-content: center;"><i class="fas fa-leaf" style="color: white; font-size: 14px;"></i></div>',
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
+            html: '<div style="background-color: #004d40; width: 35px; height: 35px; border-radius: 50%; border: 3px solid #0089d0; display: flex; align-items: center; justify-content: center; box-shadow: 0 4px 10px rgba(0,0,0,0.3);"><i class="fas fa-leaf" style="color: white; font-size: 16px;"></i></div>',
+            iconSize: [35, 35],
+            iconAnchor: [17, 17],
+            popupAnchor: [0, -20]
         });
 
         // Detailed country data
         const countries = [
             {
+                id: 'arg',
                 name: "Argentina",
                 coords: [-34.6, -58.3],
                 region: "Buenos Aires, Entre Ríos",
@@ -86,6 +98,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contacto: "INTA Argentina"
             },
             {
+                id: 'bra',
                 name: "Brasil",
                 coords: [-15.7, -47.9],
                 region: "Rio Grande do Sul",
@@ -95,6 +108,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 contacto: "EMBRAPA"
             },
             {
+                id: 'chl',
                 name: "Chile",
                 coords: [-33.4, -70.6],
                 region: "Maule, Ñuble",
@@ -104,15 +118,17 @@ document.addEventListener('DOMContentLoaded', () => {
                 contacto: "IICA Chile"
             },
             {
+                id: 'ecu',
                 name: "Ecuador",
                 coords: [-0.18, -78.4],
-                region: "Guayas",
+                region: "Guayas, Los Ríos",
                 productores: 150,
                 hectareas: "22,000 ha",
                 actividad: "Mercados Carbono",
                 contacto: "INIAP"
             },
             {
+                id: 'ury',
                 name: "Uruguay",
                 coords: [-34.9, -56.1],
                 region: "Treinta y Tres",
@@ -123,17 +139,78 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         ];
 
+        const markers = {};
+
         countries.forEach(country => {
+            // 1. Create Popup Content (Premium Styling)
             const popupContent = `
-                <div style="font-family: Roboto; min-width: 200px;">
-                    <h3 style="color: #004d40; border-bottom: 2px solid #0089d0; margin-bottom: 5px;">${country.name}</h3>
-                    <p style="margin: 3px 0"><strong>Región:</strong> ${country.region}</p>
-                    <p style="margin: 3px 0"><strong>Prod:</strong> ${country.productores} | <strong>Ha:</strong> ${country.hectareas}</p>
-                    <p style="margin: 3px 0; color: #0089d0;">${country.contacto}</p>
+                <div class="popup-header">
+                    <h3>${country.name}</h3>
+                </div>
+                <div class="popup-body">
+                    <div class="popup-stat">
+                        <span>Región:</span>
+                        <strong>${country.region}</strong>
+                    </div>
+                    <div class="popup-stat">
+                        <span>Productores:</span>
+                        <strong>${country.productores}</strong>
+                    </div>
+                    <div class="popup-stat">
+                        <span>Cobertura:</span>
+                        <strong>${country.hectareas}</strong>
+                    </div>
+                    <div class="popup-stat" style="border:none;">
+                        <span>Fase:</span>
+                        <strong>${country.actividad}</strong>
+                    </div>
+                    <a href="#" class="popup-link">Ver Ficha Completa <i class="fas fa-arrow-right"></i></a>
                 </div>
             `;
-            L.marker(country.coords, { icon: customIcon }).addTo(map).bindPopup(popupContent);
+
+            // 2. Add Marker to Map
+            const marker = L.marker(country.coords, { icon: customIcon })
+                .addTo(map)
+                .bindPopup(popupContent);
+
+            markers[country.id] = marker;
+
+            // 3. Add Item to Sidebar List
+            if (locationList) {
+                const item = document.createElement('div');
+                item.className = 'location-item';
+                item.setAttribute('data-id', country.id);
+                item.innerHTML = `
+                    <h4>${country.name}</h4>
+                    <p><i class="fas fa-map-pin" style="color:var(--accent); margin-right:5px;"></i> ${country.region}</p>
+                `;
+
+                // Interaction: Sidebar Click -> Map FlyTo
+                item.addEventListener('click', () => {
+                    // Reset active states
+                    document.querySelectorAll('.location-item').forEach(el => el.classList.remove('active'));
+                    item.classList.add('active');
+
+                    // Fly to location and open popup
+                    map.flyTo(country.coords, 6, {
+                        duration: 1.5,
+                        easeLinearity: 0.25
+                    });
+
+                    setTimeout(() => {
+                        marker.openPopup();
+                    }, 1500);
+                });
+
+                locationList.appendChild(item);
+            }
         });
+
+        // Fit bounds to show all markers initially
+        /* 
+        const group = new L.featureGroup(Object.values(markers));
+        map.fitBounds(group.getBounds(), { padding: [50, 50] });
+        */
     }
 
     // --- 4. Chart.js Charts (Dashboard) ---
@@ -184,6 +261,59 @@ document.addEventListener('DOMContentLoaded', () => {
                 }]
             },
             options: { responsive: true, scales: { y: { beginAtZero: true } } }
+        });
+    }
+    // --- 5. Newsletter Subscription with Supabase ---
+    const newsletterForm = document.getElementById('newsletter-form');
+    if (newsletterForm) {
+        newsletterForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const emailInput = newsletterForm.querySelector('input[type="email"]');
+            const button = newsletterForm.querySelector('button');
+            const originalBtnContent = button.innerHTML;
+
+            if (!emailInput || !emailInput.value) return;
+            const email = emailInput.value;
+
+            // Simple validation
+            if (!email.includes('@')) {
+                alert('Por favor ingresa un correo válido.');
+                return;
+            }
+
+            // Check if Supabase client is ready
+            if (!supabaseClient) {
+                alert('El servicio de suscripción no está configurado (Faltan credenciales de Supabase).');
+                console.error('Supabase keys missing in supabase-client.js');
+                return;
+            }
+
+            try {
+                button.disabled = true;
+                button.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
+
+                // Insert into 'subscribers' table
+                const { data, error } = await supabaseClient
+                    .from('subscribers')
+                    .insert([{ email: email, created_at: new Date() }]);
+
+                if (error) {
+                    throw error;
+                }
+
+                alert('¡Gracias por suscribirte!');
+                newsletterForm.reset();
+            } catch (err) {
+                console.error('Error subscription:', err);
+                if (err.message.includes('unique constraint') || err.code === '23505') {
+                    alert('Este correo ya está registrado.');
+                } else {
+                    alert('Hubo un error al suscribirte. Intenta nuevamente.');
+                }
+            } finally {
+                button.disabled = false;
+                button.innerHTML = originalBtnContent;
+            }
         });
     }
 });

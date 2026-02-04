@@ -496,6 +496,141 @@ ul {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* Dynamic Map Layout */
+.map-layout {
+    display: flex;
+    height: 550px;
+    background: white;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.map-sidebar {
+    width: 320px;
+    background: #fcfcfc;
+    border-right: 1px solid #eee;
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+}
+
+.map-sidebar-header {
+    padding: 20px;
+    background: var(--primary);
+    color: white;
+}
+
+.map-sidebar-header h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.map-sidebar-header p {
+    margin: 5px 0 0 0;
+    font-size: 0.85rem;
+    opacity: 0.8;
+}
+
+.location-list {
+    flex: 1;
+}
+
+.location-item {
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid #eee;
+    transition: all 0.2s;
+    border-left: 4px solid transparent;
+}
+
+.location-item:hover {
+    background: #f0f7ff;
+}
+
+.location-item.active {
+    background: #e1f0fa;
+    border-left: 4px solid var(--accent);
+}
+
+.location-item h4 {
+    margin: 0 0 5px 0;
+    color: var(--primary);
+    font-size: 1rem;
+}
+
+.location-item p {
+    margin: 0;
+    font-size: 0.85rem;
+    color: #666;
+}
+
+.map-container {
+    flex: 1;
+    height: 100%;
+}
+
+/* Premium Popup Styles */
+.leaflet-popup-content-wrapper {
+    border-radius: 8px;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.2);
+    padding: 0;
+    overflow: hidden;
+}
+
+.leaflet-popup-content {
+    margin: 0;
+    width: 260px !important;
+}
+
+.popup-header {
+    background: var(--primary);
+    color: white;
+    padding: 15px;
+}
+
+.popup-header h3 {
+    margin: 0;
+    font-size: 1.1rem;
+}
+
+.popup-body {
+    padding: 15px;
+}
+
+.popup-stat {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 8px;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 5px;
+}
+
+.popup-stat strong {
+    color: var(--primary);
+}
+
+.popup-link {
+    display: block;
+    text-align: center;
+    margin-top: 15px;
+    background: var(--accent);
+    color: white !important;
+    padding: 8px;
+    border-radius: 4px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    transition: background 0.3s;
+}
+
+.popup-link:hover {
+    background-color: #006da6;
+}
+
 /* --- Responsive Design --- */
 
 /* Tablets (portrait and smaller landscape) */
@@ -613,10 +748,24 @@ ul {
     }
 
     /* Map Mobile */
-    #coverage-map {
-        height: 350px !important;
-        /* Shorter map for mobile */
+    .map-layout {
+        flex-direction: column;
+        height: auto;
     }
+
+    .map-sidebar {
+        width: 100%;
+        max-height: 250px;
+    }
+
+    .map-container {
+        height: 400px;
+    }
+
+    #coverage-map {
+        height: 100% !important;
+    }
+
 
     /* Typography Adjustments */
     .title {
