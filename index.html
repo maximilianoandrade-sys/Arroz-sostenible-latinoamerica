@@ -9,86 +9,184 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap"
         rel="stylesheet">
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 
 <body>
+
+    <!-- Topbar (Reference: site-header sticky-header .header-topbar) -->
+    <div class="header-topbar">
+        <div class="container topbar-content">
+            <ul class="social-icons">
+                <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+                <li><a href="#"><i class="fab fa-youtube"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- Main Navbar (Reference: navbar-inner) -->
     <nav class="navbar">
         <div class="container nav-flex">
-            <div class="logo">ARROZ<strong>SOSTENIBLE</strong></div>
+            <div class="logo">
+                <!-- Text Logo simulating the image logo structure -->
+                <span>ARROZ</span><strong>SOSTENIBLE</strong>
+            </div>
             <ul class="nav-links">
-                <li><a href="#inicio">Inicio</a></li>
-                <li><a href="#avances">Avances</a></li>
-                <li><a href="#eventos">Próximos Eventos</a></li>
-                <li><a href="#paises">Países</a></li>
+                <li><a href="#inicio">INICIO</a></li>
+                <li><a href="#avances">AVANCES</a></li>
+                <li><a href="#eventos">EVENTOS</a></li>
+                <li><a href="#transparencia">TRANSPARENCIA</a></li>
+                <li class="lang-picker"><i class="fas fa-globe"></i> ESP</li>
             </ul>
         </div>
     </nav>
 
+    <!-- Hero Section (Reference: home-hero) -->
     <header id="inicio" class="hero">
-        <div class="hero-content">
-            <span class="badge">Proyecto IICA - UNEP - CCAC</span>
-            <h1>Hacia una producción de arroz baja en metano</h1>
-            <p>Plataforma regional para la participación de productores en mercados de carbono y MRV Digital.</p>
-            <a href="#avances" class="btn-primary"
-                style="display:inline-block; background: #0089d0; padding: 10px 20px; color: white; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 10px;">Ver
-                Progreso</a>
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Transformamos la producción de arroz con ciencia y colaboración</h1>
+                <h2>Una plataforma regional del IICA, UNEP y CCAC para reducir emisiones de metano y acceder a mercados
+                    de carbono.</h2>
+                <a href="#avances" class="main-btn">Conocer más</a>
+            </div>
         </div>
     </header>
 
-    <section id="avances" class="stats container">
-        <div class="stat-card">
-            <h3>USD 950,000</h3>
-            <p>Presupuesto Total</p>
-        </div>
-        <div class="stat-card">
-            <h3>5 Países</h3>
-            <p>Argentina, Brasil, Chile, Ecuador y Uruguay</p>
-        </div>
-        <div class="stat-card">
-            <h3>2028</h3>
-            <p>Meta Finalización</p>
+    <!-- Project/Status Cards (Reference: home-projects-section) -->
+    <section id="avances" class="section bg-light">
+        <div class="container">
+            <h2 class="title">Hitos del Proyecto</h2>
+            <p class="subtitle">Evolución de los componentes clave (2025-2028)</p>
+
+            <div class="cards-grid">
+                <!-- Card 1 -->
+                <div class="project-card">
+                    <div class="card-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1595246140625-573b715d98e7?auto=format&fit=crop&w=600&q=80')">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Mayo 2026</span>
+                        <h4>Hojas de Ruta Nacionales</h4>
+                        <p>Establecimiento de marcos regulatorios en Argentina, Brasil, Chile, Ecuador y Uruguay.</p>
+                        <a href="#" class="text-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 2 -->
+                <div class="project-card">
+                    <div class="card-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80')">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Dic 2026</span>
+                        <h4>Modelo MRV Digital</h4>
+                        <p>Diseño e implementación de un sistema de Monitoreo, Reporte y Verificación costo-efectivo.
+                        </p>
+                        <a href="#" class="text-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Card 3 -->
+                <div class="project-card">
+                    <div class="card-image"
+                        style="background-image: url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=600&q=80')">
+                    </div>
+                    <div class="card-content">
+                        <span class="card-tag">Jun 2027</span>
+                        <h4>Capacitación Regional</h4>
+                        <p>Transferencia de conocimiento a miles de productores y técnicos con enfoque inclusivo.</p>
+                        <a href="#" class="text-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="eventos" class="container">
-        <div class="section-title">
-            <h2>Próximos Eventos Participativos</h2>
-            <p>Actividades de consulta y mapeo de actores clave.</p>
-        </div>
-        <div class="event-grid">
-            <div class="event-card">
-                <div class="event-date">AGO 2025</div>
-                <div class="event-info">
-                    <h4>Mapeo de Actores Clave</h4>
-                    <p>Entrevistas y gestión de reuniones con sectores público-privados para validación inicial.</p>
+    <!-- Stats Section (Reference: home-about-section .info-cards) -->
+    <section class="section">
+        <div class="container">
+            <div class="stats-row">
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-globe-americas"></i></div>
+                    <h2>5</h2>
+                    <p>Países Beneficiarios</p>
                 </div>
-            </div>
-            <div class="event-card">
-                <div class="event-date">OCT 2025</div>
-                <div class="event-info">
-                    <h4>Estudio de Potencial Técnico</h4>
-                    <p>Cálculo de potencial teórico para créditos de carbono en cada país participante.</p>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-coins"></i></div>
+                    <h2>950k</h2>
+                    <p>Inversión USD</p>
                 </div>
-            </div>
-            <div class="event-card highlight">
-                <div class="event-date">ENE 2026</div>
-                <div class="event-info">
-                    <h4>Primer Reporte de Progreso</h4>
-                    <p>Presentación oficial ante UNEP sobre el estado de actividades en el Cono Sur y Región Andina.</p>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <h2>3</h2>
+                    <p>Años de Ejecución</p>
+                </div>
+                <div class="stat-item">
+                    <div class="stat-icon"><i class="fas fa-users"></i></div>
+                    <h2>+500</h2>
+                    <p>Productores Meta</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container footer-grid" style="text-align: center; padding: 20px; opacity: 0.7; font-size: 0.9rem;">
-            <p>Proyecto Reference: 25-028-AGR-24-007</p>
-            <p>Inter-American Institute for Cooperation on Agriculture (IICA)</p>
+    <!-- Events/News (Reference: latest-news-section) -->
+    <section id="eventos" class="section bg-light">
+        <div class="container">
+            <h2 class="title">Próximos Eventos</h2>
+            <div class="news-grid">
+                <div class="news-item">
+                    <div class="news-body">
+                        <h4>Mapeo de Actores Clave</h4>
+                        <span class="news-date">Agosto 2025</span>
+                        <hr>
+                        <a href="#" class="btn-sm">Ver más</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-body">
+                        <h4>Estudio de Potencial Técnico</h4>
+                        <span class="news-date">Octubre 2025</span>
+                        <hr>
+                        <a href="#" class="btn-sm">Ver más</a>
+                    </div>
+                </div>
+                <div class="news-item">
+                    <div class="news-body">
+                        <h4>Primer Reporte de Progreso</h4>
+                        <span class="news-date">Enero 2026</span>
+                        <hr>
+                        <a href="#" class="btn-sm">Ver más</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-row">
+                <div class="footer-col">
+                    <h4>ARROZ SOSTENIBLE</h4>
+                    <p>Ecosistema de innovación para el sector arrocero en América Latina.</p>
+                </div>
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <p>ID Contrato: 25-028-AGR-24-007</p>
+                    <p>Email: contacto@arrozsostenible.org</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Arroz Sostenible Latinoamérica. Basado en estándares FONTAGRO.</p>
+            </div>
         </div>
     </footer>
 
-    <!-- Re-including script.js for potential future interactivity if needed, though mostly visual now -->
-    <!-- script src="script.js"></script -->
+    <script src="script.js"></script>
 </body>
 
 </html>
