@@ -57,7 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(statsSection);
     }
 
-    // --- 3. Leaflet Map (Index) - Simple Stable Version ---
+    // --- 3. Leaflet Map (Index) - Enhanced Version ---
     const mapElement = document.getElementById('coverage-map');
     if (mapElement && typeof L !== 'undefined') {
         const map = L.map('coverage-map').setView([-20.0, -60.0], 3);
@@ -66,18 +66,73 @@ document.addEventListener('DOMContentLoaded', () => {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
+        // Custom icon
+        const customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background-color: #004d40; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #0089d0; display: flex; align-items: center; justify-content: center;"><i class="fas fa-leaf" style="color: white; font-size: 14px;"></i></div>',
+            iconSize: [30, 30],
+            iconAnchor: [15, 15]
+        });
+
+        // Detailed country data
         const countries = [
-            { name: "Argentina", coords: [-34.6, -58.3] },
-            { name: "Brasil", coords: [-15.7, -47.9] },
-            { name: "Chile", coords: [-33.4, -70.6] },
-            { name: "Ecuador", coords: [-0.18, -78.4] },
-            { name: "Uruguay", coords: [-34.9, -56.1] }
+            {
+                name: "Argentina",
+                coords: [-34.6, -58.3],
+                region: "Buenos Aires, Entre Ríos",
+                productores: 120,
+                hectareas: "15,000 ha",
+                actividad: "Diagnóstico de actores",
+                contacto: "INTA Argentina"
+            },
+            {
+                name: "Brasil",
+                coords: [-15.7, -47.9],
+                region: "Rio Grande do Sul",
+                productores: 300,
+                hectareas: "45,000 ha",
+                actividad: "Piloto MRV Digital",
+                contacto: "EMBRAPA"
+            },
+            {
+                name: "Chile",
+                coords: [-33.4, -70.6],
+                region: "Maule, Ñuble",
+                productores: 80,
+                hectareas: "8,500 ha",
+                actividad: "Capacitación Técnica",
+                contacto: "IICA Chile"
+            },
+            {
+                name: "Ecuador",
+                coords: [-0.18, -78.4],
+                region: "Guayas",
+                productores: 150,
+                hectareas: "22,000 ha",
+                actividad: "Mercados Carbono",
+                contacto: "INIAP"
+            },
+            {
+                name: "Uruguay",
+                coords: [-34.9, -56.1],
+                region: "Treinta y Tres",
+                productores: 90,
+                hectareas: "12,000 ha",
+                actividad: "Evaluación Digital",
+                contacto: "INIA"
+            }
         ];
 
         countries.forEach(country => {
-            L.marker(country.coords)
-                .addTo(map)
-                .bindPopup(`<b>${country.name}</b><br>Proyecto Activo`);
+            const popupContent = `
+                <div style="font-family: Roboto; min-width: 200px;">
+                    <h3 style="color: #004d40; border-bottom: 2px solid #0089d0; margin-bottom: 5px;">${country.name}</h3>
+                    <p style="margin: 3px 0"><strong>Región:</strong> ${country.region}</p>
+                    <p style="margin: 3px 0"><strong>Prod:</strong> ${country.productores} | <strong>Ha:</strong> ${country.hectareas}</p>
+                    <p style="margin: 3px 0; color: #0089d0;">${country.contacto}</p>
+                </div>
+            `;
+            L.marker(country.coords, { icon: customIcon }).addTo(map).bindPopup(popupContent);
         });
     }
 
