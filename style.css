@@ -346,15 +346,37 @@ ul {
 
 .news-item {
     background: var(--white);
-    padding: 30px;
     border-radius: 8px;
-    border-left: 5px solid var(--primary);
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    border-left: none;
+    /* Removed simpler styling */
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    /* Enhanced shadow */
+    overflow: hidden;
+    /* For image */
+    transition: transform 0.3s;
+}
+
+.news-item:hover {
+    transform: translateY(-5px);
+}
+
+.news-img {
+    height: 180px;
+    background-size: cover;
+    background-position: center;
+    border-bottom: 3px solid var(--accent);
+    /* Brand accent line */
+}
+
+.news-body {
+    padding: 25px;
 }
 
 .news-item h4 {
-    margin-bottom: 10px;
+    margin: 0 0 10px 0;
     color: var(--primary);
+    font-size: 1.1rem;
+    line-height: 1.4;
 }
 
 .news-date {
