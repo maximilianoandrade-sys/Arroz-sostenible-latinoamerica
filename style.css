@@ -496,13 +496,44 @@ ul {
     color: rgba(255, 255, 255, 0.5);
 }
 
+/* --- Responsive Design --- */
+
+/* Tablets (portrait and smaller landscape) */
+@media (max-width: 1024px) {
+    .container {
+        padding: 0 30px;
+    }
+
+    .hero-content h1 {
+        font-size: 2.8rem;
+    }
+
+    .stats-row {
+        gap: 20px;
+    }
+
+    .stat-item h2 {
+        font-size: 2rem;
+    }
+}
+
+/* Mobile Devices (Phones) */
 @media (max-width: 768px) {
+
+    /* Navbar Mobile */
     .header-topbar {
         display: none;
+        /* Hide topbar on mobile to save space */
+    }
+
+    .navbar {
+        padding: 15px 0;
     }
 
     .mobile-toggle {
         display: block;
+        /* Show hamburger menu */
+        font-size: 1.8rem;
     }
 
     .nav-links {
@@ -514,20 +545,98 @@ ul {
         right: 0;
         background: white;
         padding: 20px;
-        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         text-align: center;
+        gap: 20px;
     }
 
     .nav-links.active {
         display: flex;
+        animation: slideDown 0.3s ease-out;
     }
 
+    /* Hero Mobile */
     .hero {
         height: auto;
-        padding: 100px 0;
+        padding: 120px 20px 80px;
+        /* More top padding for fixed nav */
+        background-attachment: scroll;
+        /* Disable parallax on mobile for performance */
     }
 
-    .hero h1 {
+    .hero-content h1 {
         font-size: 2rem;
+        line-height: 1.3;
+    }
+
+    .hero-content h2 {
+        font-size: 1.1rem;
+        margin-bottom: 30px;
+    }
+
+    /* Grids Stacking */
+    .cards-grid,
+    .dashboard-grid,
+    .news-grid {
+        grid-template-columns: 1fr;
+        /* Single column */
+        gap: 40px;
+    }
+
+    /* Stats Mobile */
+    .stats-row {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    /* Footer Mobile */
+    .footer-row {
+        flex-direction: column;
+        text-align: center;
+        gap: 40px;
+    }
+
+    .newsletter-form {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .newsletter-form input {
+        width: 100%;
+        margin-bottom: 10px;
+        border-radius: 4px;
+    }
+
+    .newsletter-form button {
+        width: 100%;
+        border-radius: 4px;
+    }
+
+    /* Map Mobile */
+    #coverage-map {
+        height: 350px !important;
+        /* Shorter map for mobile */
+    }
+
+    /* Typography Adjustments */
+    .title {
+        font-size: 1.8rem;
+    }
+
+    .subtitle {
+        font-size: 1rem;
+    }
+}
+
+/* Animation for Menu */
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
     }
 }
