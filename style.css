@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap');
+
 :root {
     --primary: #004d40;
     --primary-dark: #00251a;
@@ -6,8 +8,8 @@
     --text-main: #333333;
     --text-light: #666666;
     --white: #ffffff;
-    --font-head: 'Montserrat', sans-serif;
-    --font-body: 'Open Sans', sans-serif;
+    --font-head: 'Roboto', sans-serif;
+    --font-body: 'Roboto', sans-serif;
 }
 
 body {
@@ -17,7 +19,7 @@ body {
     color: var(--text-main);
     line-height: 1.6;
     /* Fixed Background Image */
-    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('assets/img/bg-rice.jpg');
+    background: linear-gradient(rgba(255, 255, 255, 0.92), rgba(255, 255, 255, 0.92)), url('https://upload.wikimedia.org/wikipedia/commons/thumb/9/96/Rice_ears.jpg/1600px-Rice_ears.jpg');
     background-size: cover;
     background-attachment: fixed;
     background-position: center;
