@@ -57,113 +57,28 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(statsSection);
     }
 
-    // --- 3. Leaflet Map (Index) - Enhanced Version ---
+    // --- 3. Leaflet Map (Index) - Simple Stable Version ---
     const mapElement = document.getElementById('coverage-map');
     if (mapElement && typeof L !== 'undefined') {
-        // Init Map centered on South America
         const map = L.map('coverage-map').setView([-20.0, -60.0], 3);
 
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; OpenStreetMap contributors'
         }).addTo(map);
 
-        // Custom icon for markers
-        const customIcon = L.divIcon({
-            className: 'custom-marker',
-            html: '<div style="background-color: #004d40; width: 30px; height: 30px; border-radius: 50%; border: 3px solid #0089d0; display: flex; align-items: center; justify-content: center;"><i class="fas fa-leaf" style="color: white; font-size: 14px;"></i></div>',
-            iconSize: [30, 30],
-            iconAnchor: [15, 15]
-        });
-
-        // Detailed country data
         const countries = [
-            {
-                name: "Argentina",
-                coords: [-34.6, -58.3],
-                region: "Buenos Aires, Entre Ríos",
-                productores: 120,
-                hectareas: "15,000 ha",
-                actividad: "Mapeo de actores y diagnóstico de género",
-                contacto: "INTA Argentina"
-            },
-            {
-                name: "Brasil",
-                coords: [-15.7, -47.9],
-                region: "Rio Grande do Sul, Santa Catarina",
-                productores: 300,
-                hectareas: "45,000 ha",
-                actividad: "Implementación de MRV digital piloto",
-                contacto: "EMBRAPA"
-            },
-            {
-                name: "Chile",
-                coords: [-33.4, -70.6],
-                region: "Maule, Ñuble",
-                productores: 80,
-                hectareas: "8,500 ha",
-                actividad: "Talleres de capacitación técnica",
-                contacto: "IICA Chile - Hernán Chiriboga"
-            },
-            {
-                name: "Ecuador",
-                coords: [-0.18, -78.4],
-                region: "Guayas, Los Ríos",
-                productores: 150,
-                hectareas: "22,000 ha",
-                actividad: "Estudio de mercados de carbono",
-                contacto: "INIAP Ecuador"
-            },
-            {
-                name: "Uruguay",
-                coords: [-34.9, -56.1],
-                region: "Treinta y Tres, Rocha",
-                productores: 90,
-                hectareas: "12,000 ha",
-                actividad: "Evaluación de capacidades digitales",
-                contacto: "INIA Uruguay"
-            }
+            { name: "Argentina", coords: [-34.6, -58.3] },
+            { name: "Brasil", coords: [-15.7, -47.9] },
+            { name: "Chile", coords: [-33.4, -70.6] },
+            { name: "Ecuador", coords: [-0.18, -78.4] },
+            { name: "Uruguay", coords: [-34.9, -56.1] }
         ];
 
         countries.forEach(country => {
-            const popupContent = `
-                <div style="font-family: 'Roboto', sans-serif; min-width: 250px;">
-                    <h3 style="color: #004d40; margin: 0 0 10px 0; font-size: 18px; border-bottom: 2px solid #0089d0; padding-bottom: 5px;">
-                        <i class="fas fa-map-marker-alt"></i> ${country.name}
-                    </h3>
-                    <p style="margin: 5px 0; font-size: 13px;"><strong>📍 Región:</strong> ${country.region}</p>
-                    <p style="margin: 5px 0; font-size: 13px;"><strong>👥 Productores:</strong> ${country.productores}</p>
-                    <p style="margin: 5px 0; font-size: 13px;"><strong>🌾 Hectáreas:</strong> ${country.hectareas}</p>
-                    <p style="margin: 5px 0; font-size: 13px;"><strong>🎯 Actividad Actual:</strong> ${country.actividad}</p>
-                    <p style="margin: 5px 0; font-size: 13px; color: #0089d0;"><strong>📞 Contacto:</strong> ${country.contacto}</p>
-                </div>
-            `;
-
-            L.marker(country.coords, { icon: customIcon })
+            L.marker(country.coords)
                 .addTo(map)
-                .bindPopup(popupContent, { maxWidth: 300 });
+                .bindPopup(`<b>${country.name}</b><br>Proyecto Activo`);
         });
-
-        // Add a legend
-        const legend = L.control({ position: 'bottomright' });
-        legend.onAdd = function () {
-            const div = L.DomUtil.create('div', 'map-legend');
-            div.innerHTML = `
-                <div style="background: white; padding: 15px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.2); font-family: 'Roboto', sans-serif;">
-                    <h4 style="margin: 0 0 10px 0; color: #004d40; font-size: 14px;">
-                        <i class="fas fa-info-circle"></i> Leyenda
-                    </h4>
-                    <p style="margin: 5px 0; font-size: 12px;">
-                        <span style="display: inline-block; width: 15px; height: 15px; background: #004d40; border-radius: 50%; margin-right: 5px;"></span>
-                        País Participante
-                    </p>
-                    <p style="margin: 5px 0; font-size: 11px; color: #666;">
-                        Haz clic en los marcadores para ver detalles
-                    </p>
-                </div>
-            `;
-            return div;
-        };
-        legend.addTo(map);
     }
 
     // --- 4. Chart.js Charts (Dashboard) ---
