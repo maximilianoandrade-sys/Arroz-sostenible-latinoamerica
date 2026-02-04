@@ -9,13 +9,16 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap"
         rel="stylesheet">
-    <!-- FontAwesome for Icons -->
+    <!-- FontAwesome -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Leaflet CSS -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+        integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 
 <body>
 
-    <!-- Topbar (Reference: site-header sticky-header .header-topbar) -->
+    <!-- Topbar -->
     <div class="header-topbar">
         <div class="container topbar-content">
             <ul class="social-icons">
@@ -27,24 +30,27 @@
         </div>
     </div>
 
-    <!-- Main Navbar (Reference: navbar-inner) -->
-    <nav class="navbar">
+    <!-- Main Navbar -->
+    <nav class="navbar" id="main-nav">
         <div class="container nav-flex">
             <div class="logo">
-                <!-- Text Logo simulating the image logo structure -->
                 <span>ARROZ</span><strong>SOSTENIBLE</strong>
             </div>
-            <ul class="nav-links">
-                <li><a href="#inicio">INICIO</a></li>
-                <li><a href="#avances">AVANCES</a></li>
-                <li><a href="#eventos">EVENTOS</a></li>
-                <li><a href="#transparencia">TRANSPARENCIA</a></li>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#inicio">INICIO</a></li>
+                <li><a href="index.html#avances">AVANCES</a></li>
+                <li><a href="dashboard.html">DASHBOARD</a></li> <!-- New Link -->
+                <li><a href="index.html#mapa">MAPA</a></li> <!-- New Link -->
+                <li><a href="index.html#eventos">EVENTOS</a></li>
                 <li class="lang-picker"><i class="fas fa-globe"></i> ESP</li>
             </ul>
         </div>
     </nav>
 
-    <!-- Hero Section (Reference: home-hero) -->
+    <!-- Hero Section -->
     <header id="inicio" class="hero">
         <div class="container hero-container">
             <div class="hero-content">
@@ -56,14 +62,12 @@
         </div>
     </header>
 
-    <!-- Project/Status Cards (Reference: home-projects-section) -->
+    <!-- Project/Status Cards -->
     <section id="avances" class="section bg-light">
         <div class="container">
             <h2 class="title">Hitos del Proyecto</h2>
             <p class="subtitle">Evolución de los componentes clave (2025-2028)</p>
-
             <div class="cards-grid">
-                <!-- Card 1 -->
                 <div class="project-card">
                     <div class="card-image"
                         style="background-image: url('https://images.unsplash.com/photo-1595246140625-573b715d98e7?auto=format&fit=crop&w=600&q=80')">
@@ -75,8 +79,6 @@
                         <a href="#" class="text-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <!-- Card 2 -->
                 <div class="project-card">
                     <div class="card-image"
                         style="background-image: url('https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=600&q=80')">
@@ -89,8 +91,6 @@
                         <a href="#" class="text-link">Ver detalles <i class="fas fa-arrow-right"></i></a>
                     </div>
                 </div>
-
-                <!-- Card 3 -->
                 <div class="project-card">
                     <div class="card-image"
                         style="background-image: url('https://images.unsplash.com/photo-1605000797499-95a51c5269ae?auto=format&fit=crop&w=600&q=80')">
@@ -106,36 +106,45 @@
         </div>
     </section>
 
-    <!-- Stats Section (Reference: home-about-section .info-cards) -->
-    <section class="section">
+    <!-- Stats Section with Animation Counters -->
+    <section class="section" id="stats-section">
         <div class="container">
             <div class="stats-row">
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-globe-americas"></i></div>
-                    <h2>5</h2>
+                    <h2 class="counter" data-target="5">0</h2>
                     <p>Países Beneficiarios</p>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-coins"></i></div>
-                    <h2>950k</h2>
-                    <p>Inversión USD</p>
+                    <h2 class="counter" data-target="950">0</h2>
+                    <p>Mil USD Inversión</p>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
-                    <h2>3</h2>
+                    <h2 class="counter" data-target="3">0</h2>
                     <p>Años de Ejecución</p>
                 </div>
                 <div class="stat-item">
                     <div class="stat-icon"><i class="fas fa-users"></i></div>
-                    <h2>+500</h2>
-                    <p>Productores Meta</p>
+                    <h2 class="counter" data-target="500">0</h2>
+                    <p>Productores Meta (+)</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Events/News (Reference: latest-news-section) -->
-    <section id="eventos" class="section bg-light">
+    <!-- Map Section -->
+    <section id="mapa" class="section bg-light">
+        <div class="container">
+            <h2 class="title">Cobertura Regional</h2>
+            <p class="subtitle">Países donde estamos implementando soluciones sostenibles</p>
+            <div id="coverage-map" style="height: 500px; width: 100%; border-radius: 8px; z-index: 1;"></div>
+        </div>
+    </section>
+
+    <!-- Events/News -->
+    <section id="eventos" class="section">
         <div class="container">
             <h2 class="title">Próximos Eventos</h2>
             <div class="news-grid">
@@ -175,6 +184,13 @@
                     <p>Ecosistema de innovación para el sector arrocero en América Latina.</p>
                 </div>
                 <div class="footer-col">
+                    <h4>Suscríbete al Newsletter</h4>
+                    <form class="newsletter-form" id="newsletter-form">
+                        <input type="email" placeholder="Tu correo electrónico" required>
+                        <button type="submit"><i class="fas fa-arrow-right"></i></button>
+                    </form>
+                </div>
+                <div class="footer-col">
                     <h4>Contacto</h4>
                     <p>ID Contrato: 25-028-AGR-24-007</p>
                     <p>Email: contacto@arrozsostenible.org</p>
@@ -186,6 +202,9 @@
         </div>
     </footer>
 
+    <!-- Leaflet JS -->
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="script.js"></script>
 </body>
 

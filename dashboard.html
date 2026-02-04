@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Arroz Sostenible Latinoamérica</title>
+    <link rel="stylesheet" href="style.css">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Open+Sans:wght@300;400;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <div class="header-topbar">
+        <div class="container topbar-content">
+            <ul class="social-icons">
+                <li><a href="#"><i class="fab fa-x-twitter"></i></a></li>
+                <li><a href="#"><i class="fab fa-instagram"></i></a></li>
+                <li><a href="#"><i class="fab fa-linkedin"></i></a></li>
+            </ul>
+        </div>
+    </div>
+
+    <nav class="navbar" id="main-nav">
+        <div class="container nav-flex">
+            <div class="logo">
+                <span>ARROZ</span><strong>SOSTENIBLE</strong>
+            </div>
+            <div class="mobile-toggle" id="mobile-toggle">
+                <i class="fas fa-bars"></i>
+            </div>
+            <ul class="nav-links" id="nav-links">
+                <li><a href="index.html#inicio">INICIO</a></li>
+                <li><a href="index.html#avances">AVANCES</a></li>
+                <li><a href="dashboard.html" class="active">DASHBOARD</a></li>
+                <li><a href="index.html#mapa">MAPA</a></li>
+                <li class="lang-picker"><i class="fas fa-globe"></i> ESP</li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero" style="height: 300px; background-position: top;">
+        <div class="container hero-container">
+            <div class="hero-content">
+                <h1>Dashboard de Impacto</h1>
+                <h2>Monitoreo en tiempo real de los indicadores clave del proyecto.</h2>
+            </div>
+        </div>
+    </header>
+
+    <section class="section">
+        <div class="container">
+            <div class="dashboard-grid">
+                <!-- Chart 1: Budget Distribution -->
+                <div class="chart-card">
+                    <h3>Distribución Presupuestaria (USD)</h3>
+                    <canvas id="budgetChart"></canvas>
+                </div>
+
+                <!-- Chart 2: Emissions Reduction -->
+                <div class="chart-card">
+                    <h3>Reducción Estimada de Metano</h3>
+                    <canvas id="emissionsChart"></canvas>
+                </div>
+
+                <!-- Chart 3: Progress by Country -->
+                <div class="chart-card full-width">
+                    <h3>Avance de Adopción por País</h3>
+                    <canvas id="adoptionChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer class="site-footer">
+        <div class="container">
+            <div class="footer-bottom">
+                <p>&copy; 2026 Arroz Sostenible Latinoamérica.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
